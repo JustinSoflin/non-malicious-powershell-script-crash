@@ -48,8 +48,8 @@ These events reflect Azure control-plane remediation efforts against a **degrade
 ## Investigation
 
 ### pwncrypt.ps1 Stops Unexpectedly
-- Multiple **scheduled PowerShell scripts** were configured to run on _`windows-target-1`_
-- The scheduled **_pwncrypt.ps1_** script stops unexpectedly at **`2025-11-24T04:12:59.7367393Z`**
+- Multiple attack simulator PowerShell scripts were configured to run on _`windows-target-1`_
+- The scheduled 🟡**pwncrypt.ps1**🟡 script stops unexpectedly at 🟡`2025-11-24T04:12:59.7367393Z`🟡
 - No subsequent scheduled scripts executed after this point
 
 ```kql
@@ -66,8 +66,8 @@ DeviceProcessEvents
 <br>
 
 ### Windows Error Reporting Detects Crash
-- **_WerFault.exe_** activity directly correlates with the unexpected termination of **_pwncrypt.ps1_**
-- The final execution of **_pwncrypt.ps1_** occurred at **`2025-11-24T04:12:59.7367393Z`**, seconds before the crash was recorded
+- **_WerFault.exe_** activity directly correlates with the unexpected termination of 🟡**pwncrypt.ps1**🟡 - ProcessId:🟡`6500`🟡
+- The final execution of🟢**pwncrypt.ps1**🟢 occurred at 🟢`2025-11-24T04:12:59.7367393Z`🟢, seconds before the crash was recorded
 - Some PowerShellCommand events appear after the WerFault entry because PowerShell finished writing its logs after the process ended
 - Process start and stop events confirm the script ran **before the crash**, instead of after
 
@@ -87,9 +87,16 @@ DeviceProcessEvents
 ### Azure MMA Heartbeat service installed
 
 - Azure detected something wrong with the guest agent
-- Azure (re)installed or repaired the MMA Extension Heartbeat Service
+- Azure (re)installed or repaired the 🟢*MMA Extension Heartbeat Service*🟢
+   - MMA = Microsoft Monitoring Agent
+   - Heartbeat = periodic health signal sent from the VM to Azure
+   - regularly tells Azure VM is alive, healthy, and able to communicate
 - Azure then went through multiple internal processes trying to restore a “healthy” state
 - This is the first sign of control-plane disruption
+- Note that multiple 🔵*MMA Heartbeat*🔵 events share identical timestamps 🔵`2025-11-24T04:13:04.160`🔵 & 🔵`2025-11-24T04:13:04.162`🔵
+   - In agent-driven recovery scenarios, buffered logs are dumped together
+   - KQL _TimeGenerated_ is often Event creation time, ingestion time, or flush time, not the precise moment each internal action occurred
+   - This is the same reason PowerShell telemetry appeared after WerFault — buffering, not delayed execution
 
 ```kql
 let crash = todatetime('2025-11-24T04:10:00');
@@ -100,13 +107,13 @@ DeviceEvents
 | order by TimeGenerated desc
 ```
 
-<img width="1045" height="340" alt="image" src="https://github.com/user-attachments/assets/494e69b1-f269-4f32-9b89-226a5f983d6f" />
+<img width="1279" height="417" alt="image" src="https://github.com/user-attachments/assets/54cd2a48-49bf-4243-b860-71b0b49f17c2" />
 
 <Br>
 
 ### Guest Configuration compliance checks gc_worker.exe
 
-- Azure repeatedly runs gc_worker.exe attempting to re‑establish trust and validate the VM after the guest agent became unstable
+- Azure repeatedly runs 🟡*gc_worker.exe*🟡 attempting to re‑establish trust and validate the VM after the guest agent became unstable
 - Some compliance checks are _NonCompliant_ because the VM is in a partial / degraded state
 - VM never fully re‑established trust, causing ARM API commands and attack simulation to cease
 
