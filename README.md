@@ -47,6 +47,8 @@ These events reflect Azure control-plane remediation efforts against a **degrade
   
 ## Investigation
 
+<Br>
+
 ### pwncrypt.ps1 Stops Unexpectedly
 - Multiple attack simulator PowerShell scripts were configured to run on _`windows-target-1`_
 - The scheduled 🟡**pwncrypt.ps1**🟡 script stops unexpectedly at 🟡`2025-11-24T04:12:59.7367393Z`🟡
@@ -64,6 +66,7 @@ DeviceProcessEvents
 <img width="1115" height="262" alt="image" src="https://github.com/user-attachments/assets/eb27289c-4dbc-427c-8f65-6446548b8901" />
 
 <br>
+<Br>
 
 ### Windows Error Reporting Detects Crash
 - **_WerFault.exe_** activity directly correlates with the unexpected termination of 🟡**pwncrypt.ps1**🟡 - ProcessId:🟡`6500`🟡
@@ -83,6 +86,7 @@ DeviceProcessEvents
 <img width="1136" height="296" alt="image" src="https://github.com/user-attachments/assets/be751198-5396-4e43-bbf5-1ad8cdd074a6" />
 
 <br>
+<Br>
 
 ### Azure MMA Heartbeat service installed
 
@@ -110,6 +114,7 @@ DeviceEvents
 <img width="1279" height="417" alt="image" src="https://github.com/user-attachments/assets/54cd2a48-49bf-4243-b860-71b0b49f17c2" />
 
 <Br>
+<Br>
 
 ### Guest Configuration compliance checks gc_worker.exe
 
@@ -129,6 +134,7 @@ DeviceEvents
 <img width="1140" height="319" alt="image" src="https://github.com/user-attachments/assets/8011828a-7ad1-44a5-933a-b4bd6d93261c" />
 
 <br>
+<Br>
 
 ### Restarting the VM did not restore functionality
 
