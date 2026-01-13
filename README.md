@@ -25,6 +25,7 @@
   - [Azure MMA Heartbeat Service Installed](#azure-mma-heartbeat-service-installed)
   - [Guest Configuration Compliance Checks gc_worker.exe](#guest-configuration-compliance-checks-gc_workerexe)
   - [Restarting the VM Did Not Restore Functionality](#restarting-the-vm-did-not-restore-functionality)
+  - [Why Redeploying Worked](#why-redeploying-worked)
 - [Recommended Actions](#recommended-actions)
 - [Conclusion](#conclusion)
 
