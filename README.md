@@ -1,4 +1,4 @@
-# Non-Malicious Powershell Script Crash
+# Unhandled PowerShell Script Crash | Azure Guest Agent Degradation
 
 <img width="1400" alt="Untitled drawing (4)" src="https://github.com/user-attachments/assets/e0370a48-91e1-4853-b521-bf0e8dd7f72c" />
 
